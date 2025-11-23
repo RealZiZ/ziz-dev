@@ -1,0 +1,120 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  scroll-behavior: smooth;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+.focus\:not-sr-only:focus {
+  position: static;
+  width: auto;
+  height: auto;
+  padding: inherit;
+  margin: inherit;
+  overflow: visible;
+  clip: auto;
+  white-space: normal;
+}
+
+@layer base {
+  body {
+    @apply bg-black text-white antialiased;
+    font-family: 'Inter', system-ui, sans-serif;
+  }
+}
+
+@layer utilities {
+  .glass {
+    @apply bg-white/5 backdrop-blur-md border border-white/10;
+  }
+  
+  .neon-glow {
+    text-shadow: 0 0 10px #4f99ff, 0 0 20px #4f99ff, 0 0 30px #4f99ff;
+  }
+  
+  .neon-border {
+    @apply border-2 border-neon-blue;
+    box-shadow: 0 0 10px #4f99ff, inset 0 0 10px rgba(79, 153, 255, 0.2);
+  }
+  
+  .neon-border-hover:hover {
+    @apply border-neon-blue;
+    box-shadow: 0 0 20px #4f99ff, 0 0 30px #4f99ff, inset 0 0 20px rgba(79, 153, 255, 0.3);
+    transition: all 0.3s ease;
+  }
+  
+  .text-gradient {
+    @apply bg-clip-text text-transparent;
+    background-image: linear-gradient(135deg, #4f99ff 0%, #3b82f6 100%);
+  }
+  
+  *:focus-visible {
+    @apply outline-none ring-2 ring-neon-blue ring-offset-2 ring-offset-black;
+  }
+  
+  a, button {
+    @apply transition-all duration-200;
+  }
+  
+  .profile-frame {
+    position: relative;
+    border-radius: 50%;
+    overflow: hidden;
+  }
+  
+  .profile-frame::before {
+    content: '';
+    position: absolute;
+    inset: -2px;
+    border-radius: 50%;
+    padding: 2px;
+    background: linear-gradient(45deg, #4f99ff, #3b82f6, #ff00ff, #4f99ff);
+    background-size: 300% 300%;
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    animation: rotate-border 3s linear infinite;
+  }
+  
+  @keyframes rotate-border {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-black;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-neon-blue/30 rounded-full;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-neon-blue/50;
+}
+
